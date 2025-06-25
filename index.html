@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUST - ONE LOVE ONE FUTURE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HUST - ONE LOVE ONE FUTURE</h1>
+            <div class="banner">
+                <img id="banner-image" src="" alt="Custom Banner">
+                <div class="image-url">
+                    <input type="text" id="image-url" placeholder="Dán link ảnh vào đây">
+                    <button onclick="updateBanner()">Cập nhật ảnh</button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="task-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nhiệm vụ</th>
+                        <th>Số phiên</th>
+                        <th>Phiên 1</th>
+                        <th>Phiên 2</th>
+                        <th>Phiên 3</th>
+                        <th>Phiên 4</th>
+                        <th>Phiên 5</th>
+                        <th>Phiên 6</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="task-body">
+                    <!-- Tasks will be added here -->
+                </tbody>
+            </table>
+            
+            <div class="controls">
+                <button onclick="addTask()">Thêm nhiệm vụ</button>
+                <button onclick="saveTasks()">Lưu nhiệm vụ</button>
+                <button onclick="clearAll()">Xóa tất cả</button>
+            </div>
+        </div>
+        
+        <div id="motivation" class="hidden">
+            <h2>Cố lên! Sắp về đích rồi!</h2>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
