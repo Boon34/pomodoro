@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #d10000; /* Màu đỏ HUST */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #d10000;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.banner {
+    margin: 20px 0;
+}
+
+#banner-image {
+    max-width: 100%;
+    max-height: 200px;
+    border: 2px solid #d10000;
+    display: block;
+    margin: 0 auto;
+}
+
+.image-url {
+    margin-top: 10px;
+}
+
+.image-url input {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #d10000;
+}
+
+.image-url button {
+    padding: 8px 15px;
+    background-color: #d10000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.task-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #d10000;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #d10000;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #ffecec;
+}
+
+.controls {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.controls button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #d10000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.controls button:hover {
+    background-color: #a80000;
+}
+
+#motivation {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffecec;
+    border: 2px solid #d10000;
+    border-radius: 10px;
+    display: none;
+}
+
+#motivation h2 {
+    color: #d10000;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.task-name {
+    width: 30%;
+}
+
+.task-name input {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #d10000;
+}
+
+.session-count select {
+    padding: 5px;
+    border: 1px solid #d10000;
+}
+
+.session-checkbox {
+    transform: scale(1.5);
+    cursor: pointer;
+}
