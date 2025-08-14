@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -165,8 +164,8 @@
             const fractionalPart = Math.floor((score % 1) * 1000);
             const formattedResult = String(fractionalPart).padStart(3, '0');
 
-            // Display the result
-            document.getElementById('learningResult').textContent = `Điểm hiệu suất học tập: 0.${formattedResult}`;
+            // Display the result: show the integer part (xxx) directly
+            document.getElementById('learningResult').textContent = `Điểm hiệu suất học tập: ${formattedResult}`;
         }
 
         // Function to calculate Health Performance
@@ -202,8 +201,8 @@
             const fractionalPart = Math.floor((score % 1) * 1000);
             const formattedResult = String(fractionalPart).padStart(3, '0');
 
-            // Display the result
-            document.getElementById('healthResult').textContent = `Điểm hiệu suất sức khỏe: 0.${formattedResult}`;
+            // Display the result: show the integer part (xxx) directly
+            document.getElementById('healthResult').textContent = `Điểm hiệu suất sức khỏe: ${formattedResult}`;
         }
 
         // Add event listeners to the calculate buttons
