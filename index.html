@@ -1,56 +1,220 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HUST - ONE LOVE ONE FUTURE</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Theo Dõi Hiệu Suất Cá Nhân</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        /* CSS styles embedded directly in the HTML file */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top to prevent overflowing on small screens */
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 900px;
+            width: 100%;
+        }
+        .section-title {
+            font-size: 1.75rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: #374151;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500; /* font-medium */
+            color: #4b5563;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            border: 1px solid #d1d5db;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #3b82f6; /* ring-blue-500 */
+        }
+        .calculate-button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            font-weight: 600; /* font-semibold */
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-top: 1.5rem;
+        }
+        .calculate-button:hover {
+            background-color: #2563eb;
+            transform: translateY(-1px);
+        }
+        .calculate-button:active {
+            transform: translateY(0);
+        }
+        .result-box {
+            background-color: #e0f2fe; /* blue-100 */
+            color: #0b2241; /* blue-900 */
+            padding: 1rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            text-align: center;
+            margin-top: 1.5rem;
+            border: 2px solid #93c5fd; /* blue-300 */
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>HUST - ONE LOVE ONE FUTURE</h1>
-            <div class="banner">
-                <img id="banner-image" src="" alt="Custom Banner">
-                <div class="image-url">
-                    <input type="text" id="image-url" placeholder="Dán link ảnh vào đây">
-                    <button onclick="updateBanner()">Cập nhật ảnh</button>
+<body class="bg-gray-100 flex items-center justify-center p-5 min-h-screen">
+    <div class="container mx-auto p-8 bg-white rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Learning Performance Section -->
+        <div class="p-6 bg-blue-50 rounded-lg shadow-inner">
+            <h2 class="section-title text-blue-800">Hiệu suất Học tập 📚</h2>
+            <div class="space-y-4">
+                <div class="input-group">
+                    <label for="numExercises">Số bài tập hoàn thành:</label>
+                    <input type="number" id="numExercises" value="0" min="0" class="focus:border-blue-500">
                 </div>
+                <div class="input-group">
+                    <label for="focusedReps">Số lần tập trung cao độ:</label>
+                    <input type="number" id="focusedReps" value="0" min="0" class="focus:border-blue-500">
+                </div>
+                <div class="input-group">
+                    <label for="numErrors">Số lỗi sai mắc phải:</label>
+                    <input type="number" id="numErrors" value="0" min="0" class="focus:border-blue-500">
+                </div>
+                <div class="input-group">
+                    <label for="distractionTime">Thời gian mất tập trung (phút):</label>
+                    <input type="number" id="distractionTime" value="0" min="0" class="focus:border-blue-500">
+                </div>
+                <button id="calculateLearning" class="calculate-button w-full">Tính Hiệu suất Học tập</button>
             </div>
-        </header>
-        
-        <div class="task-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nhiệm vụ</th>
-                        <th>Số phiên</th>
-                        <th>Phiên 1</th>
-                        <th>Phiên 2</th>
-                        <th>Phiên 3</th>
-                        <th>Phiên 4</th>
-                        <th>Phiên 5</th>
-                        <th>Phiên 6</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <tbody id="task-body">
-                    <!-- Tasks will be added here -->
-                </tbody>
-            </table>
-            
-            <div class="controls">
-                <button onclick="addTask()">Thêm nhiệm vụ</button>
-                <button onclick="saveTasks()">Lưu nhiệm vụ</button>
-                <button onclick="clearAll()">Xóa tất cả</button>
-            </div>
+            <div id="learningResult" class="result-box mt-6">Điểm hiệu suất học tập: --</div>
         </div>
-        
-        <div id="motivation" class="hidden">
-            <h2>Cố lên! Sắp về đích rồi!</h2>
+
+        <!-- Health Performance Section -->
+        <div class="p-6 bg-green-50 rounded-lg shadow-inner">
+            <h2 class="section-title text-green-800">Hiệu suất Sức khỏe 💪</h2>
+            <div class="space-y-4">
+                <div class="input-group">
+                    <label for="sleepHours">Số giờ ngủ (h):</label>
+                    <input type="number" id="sleepHours" value="0" min="0" step="0.5" class="focus:border-green-500">
+                </div>
+                <div class="input-group">
+                    <label for="mealsEaten">Số bữa ăn trong ngày:</label>
+                    <input type="number" id="mealsEaten" value="0" min="0" class="focus:border-green-500">
+                </div>
+                <div class="input-group">
+                    <label for="mealsSkipped">Số bữa bỏ ăn trong ngày:</label>
+                    <input type="number" id="mealsSkipped" value="0" min="0" class="focus:border-green-500">
+                </div>
+                <div class="input-group">
+                    <label for="exerciseSessions">Số buổi tập thể dục:</label>
+                    <input type="number" id="exerciseSessions" value="0" min="0" class="focus:border-green-500">
+                </div>
+                <button id="calculateHealth" class="calculate-button w-full bg-green-500 hover:bg-green-600">Tính Hiệu suất Sức khỏe</button>
+            </div>
+            <div id="healthResult" class="result-box mt-6 bg-green-100 text-green-900 border-green-300">Điểm hiệu suất sức khỏe: --</div>
         </div>
     </div>
-    
-    <script src="script.js"></script>
+
+    <script>
+        // JavaScript functions embedded directly in the HTML file
+        // Function to calculate Learning Performance
+        function calculateLearningPerformance() {
+            // Get input values from the HTML elements
+            const numExercises = parseFloat(document.getElementById('numExercises').value) || 0;
+            const focusedReps = parseFloat(document.getElementById('focusedReps').value) || 0;
+            const numErrors = parseFloat(document.getElementById('numErrors').value) || 0;
+            const distractionTime = parseFloat(document.getElementById('distractionTime').value) || 0;
+
+            // Convert distraction time to points (1 minute = 0.1 points)
+            const distractionPoints = distractionTime * 0.1;
+
+            // Apply the learning performance formula
+            // Formula: (số bài tập + số rep tập trung - số lỗi sai - thời gian mất tập trung) / 16
+            let score = (numExercises + focusedReps - numErrors - distractionPoints) / 16;
+
+            // Ensure the score is not negative (performance cannot be less than 0)
+            if (score < 0) {
+                score = 0;
+            }
+
+            // Extract the fractional part and format it
+            // Multiply by 1000 to shift the fractional part to integer, then take modulo 1000
+            // Pad with leading zeros if necessary to ensure 3 digits (e.g., 5 -> 005)
+            const fractionalPart = Math.floor((score % 1) * 1000);
+            const formattedResult = String(fractionalPart).padStart(3, '0');
+
+            // Display the result
+            document.getElementById('learningResult').textContent = `Điểm hiệu suất học tập: 0.${formattedResult}`;
+        }
+
+        // Function to calculate Health Performance
+        function calculateHealthPerformance() {
+            // Get input values from the HTML elements
+            const sleepHours = parseFloat(document.getElementById('sleepHours').value) || 0;
+            const mealsEaten = parseFloat(document.getElementById('mealsEaten').value) || 0;
+            const mealsSkipped = parseFloat(document.getElementById('mealsSkipped').value) || 0;
+            const exerciseSessions = parseFloat(document.getElementById('exerciseSessions').value) || 0;
+
+            // Apply special scoring for sleep hours
+            let sleepScore = 0;
+            if (sleepHours >= 6 && sleepHours < 7) {
+                sleepScore = 1;
+            } else if (sleepHours >= 7 && sleepHours <= 8) {
+                sleepScore = 2;
+            } else if (sleepHours > 8) {
+                // If user sleeps more than 8 hours, still count as 2 points
+                sleepScore = 2;
+            }
+            // If sleepHours < 6, sleepScore remains 0
+
+            // Apply the health performance formula
+            // Formula: (số giờ ngủ + số bữa ăn 1 ngày - số bữa ko ăn 1 ngày + số buổi tập td) / 24
+            let score = (sleepScore + mealsEaten - mealsSkipped + exerciseSessions) / 24;
+
+            // Ensure the score is not negative
+            if (score < 0) {
+                score = 0;
+            }
+
+            // Extract the fractional part and format it
+            const fractionalPart = Math.floor((score % 1) * 1000);
+            const formattedResult = String(fractionalPart).padStart(3, '0');
+
+            // Display the result
+            document.getElementById('healthResult').textContent = `Điểm hiệu suất sức khỏe: 0.${formattedResult}`;
+        }
+
+        // Add event listeners to the calculate buttons
+        document.getElementById('calculateLearning').addEventListener('click', calculateLearningPerformance);
+        document.getElementById('calculateHealth').addEventListener('click', calculateHealthPerformance);
+
+        // Initial calculation on page load (optional, to show initial values)
+        document.addEventListener('DOMContentLoaded', () => {
+            calculateLearningPerformance();
+            calculateHealthPerformance();
+        });
+    </script>
 </body>
 </html>
