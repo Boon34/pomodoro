@@ -81,6 +81,13 @@
             margin-top: 1.5rem;
             border: 2px solid #93c5fd; /* blue-300 */
         }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center p-5 min-h-screen">
@@ -115,8 +122,8 @@
             <h2 class="section-title text-green-800">Hiệu suất Sức khỏe 💪</h2>
             <div class="space-y-4">
                 <div class="input-group">
-                    <label for="sleepHours">Số giờ ngủ (h):</label>
-                    <input type="number" id="sleepHours" value="0" min="0" step="0.5" class="focus:border-green-500">
+                    <label for="earlySleepMinutes">Số phút đi ngủ sớm:</label>
+                    <input type="number" id="earlySleepMinutes" value="0" min="0" class="focus:border-green-500">
                 </div>
                 <div class="input-group">
                     <label for="mealsEaten">Số bữa ăn trong ngày:</label>
@@ -135,6 +142,58 @@
             <div id="healthResult" class="result-box mt-6 bg-green-100 text-green-900 border-green-300">Điểm hiệu suất sức khỏe: --</div>
         </div>
     </div>
+
+    <script>
+        // Function to calculate Learning Performance
+        function calculateLearningPerformance() {
+            const numExercises = parseFloat(document.getElementById('numExercises').value) || 0;
+            const focusedReps = parseFloat(document.getElementById('focusedReps').value) || 0;
+            const numErrors = parseFloat(document.getElementById('numErrors').value) || 0;
+            const distractionTime = parseFloat(document.getElementById('distractionTime').value) || 0;
+
+            const distractionPoints = distractionTime * 0.1;
+            let score = (numExercises + focusedReps - numErrors - distractionPoints) / 16;
+            if (score < 0) score = 0;
+
+            const fractionalPart = Math.floor((score % 1) * 1000);
+            const formattedResult = String(fractionalPart).padStart(3, '0');
+            document.getElementById('learningResult').textContent = `Điểm hiệu suất học tập: ${formattedResult}`;
+        }
+
+        // Function to calculate Health Performance
+        function calculateHealthPerformance() {
+            // Renamed from sleepHours to earlySleepMinutes as per new requirement
+            const earlySleepMinutes = parseFloat(document.getElementById('earlySleepMinutes').value) || 0;
+            const mealsEaten = parseFloat(document.getElementById('mealsEaten').value) || 0;
+            const mealsSkipped = parseFloat(document.getElementById('mealsSkipped').value) || 0;
+            const exerciseSessions = parseFloat(document.getElementById('exerciseSessions').value) || 0;
+
+            // Calculate sleep score: 1 minute = 0.1 points
+            const sleepScore = earlySleepMinutes * 0.1;
+
+            // Apply the health performance formula
+            // Formula: (số phút đi ngủ sớm * 0.1 + số bữa ăn 1 ngày - số bữa ko ăn 1 ngày + số buổi tập td) / 24
+            let score = (sleepScore + mealsEaten - mealsSkipped + exerciseSessions) / 24;
+            if (score < 0) score = 0;
+
+            const fractionalPart = Math.floor((score % 1) * 1000);
+            const formattedResult = String(fractionalPart).padStart(3, '0');
+            document.getElementById('healthResult').textContent = `Điểm hiệu suất sức khỏe: ${formattedResult}`;
+        }
+
+        // Add event listeners to buttons
+        document.getElementById('calculateLearning').addEventListener('click', calculateLearningPerformance);
+        document.getElementById('calculateHealth').addEventListener('click', calculateHealthPerformance);
+
+        // Initial setup on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Perform initial calculations to display default scores
+            calculateLearningPerformance();
+            calculateHealthPerformance();
+        });
+    </script>
+</body>
+</html>
 
     <script>
         // JavaScript functions embedded directly in the HTML file
